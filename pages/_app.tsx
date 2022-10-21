@@ -3,9 +3,11 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { DehydratedState, Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import styled from '@emotion/styled';
+import { Global } from '@emotion/react';
 import '../styles/globals.css';
 
 import FNB from '@/components/footer/FNB';
+import reset from '@/styles/reset';
 
 function MyApp({ Component, pageProps }: AppProps<{ dehydratedState: DehydratedState }>) {
   const [queryClient] = useState(() => new QueryClient());
@@ -19,6 +21,7 @@ function MyApp({ Component, pageProps }: AppProps<{ dehydratedState: DehydratedS
       </Head>
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
+          <Global styles={reset} />
           <BackgroundBox>
             <AppContainerBox>
               <Component {...pageProps} />
