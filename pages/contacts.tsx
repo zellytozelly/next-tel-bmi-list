@@ -5,6 +5,7 @@ import styled from '@emotion/styled';
 import { getContacts, getContactsCount } from '@/services/contact';
 import ContactCard from '@/components/contact/ContactCard';
 import Pagination from '@/components/common/PaginationButton';
+import HeaderTitle from '@/components/common/HeaderTitle';
 
 const Contacts = () => {
   const [page, setPage] = useState(1);
@@ -29,7 +30,7 @@ const Contacts = () => {
 
   return (
     <div>
-      <h3>연락처 전체보기</h3>
+      <HeaderTitle>연락처 전체보기</HeaderTitle>
       <ContactSection>
         <ContactCardWrapper>
           {data.map((item) => {
@@ -62,6 +63,8 @@ const ContactSection = styled.section`
   height: 500px;
 `;
 
-const ContactCardWrapper = styled.ul``;
+const ContactCardWrapper = styled.ul`
+  width: 100%;
+`;
 
 export default Contacts;

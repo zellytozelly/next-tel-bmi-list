@@ -25,9 +25,9 @@ const ContactCard = ({ item }: Props) => {
 const ContactItem = styled.li`
   display: flex;
   align-items: center;
-  margin-top: 20px;
+  margin-bottom: 20px;
   padding: 20px;
-  width: 334px;
+  width: inherit;
   height: 75px;
   border-radius: 10px;
   background-color: ${colors.LIGHT_BROWN};
