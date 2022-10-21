@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import styled from '@emotion/styled';
 
 const FNB = () => {
   return (
@@ -22,5 +23,9 @@ const FNB = () => {
     </footer>
   );
 };
+
+const Footer = styled.footer`
+  position: fixed;
+`;
 
 export default FNB;
