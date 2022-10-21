@@ -12,6 +12,8 @@ const colors = {
 
   DARK_BROWN: '#b6ada5',
   LIGHT_BROWN: '#f4f1ed',
+
+  DARK_GREY: '##83786F',
   LIGHT_GREY: '#d9d9d9',
 
   TEXT_59: '#595959',

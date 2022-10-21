@@ -4,6 +4,9 @@ import styled from '@emotion/styled';
 import { PAGE_INDEX } from '@/constant';
 import { colors } from '@/styles/colors';
 
+import LeftArrowIcon from '@/assets/svg/left-arrow.svg';
+import RightArrowIcon from '@/assets/svg/right-arrow.svg';
+
 interface Props {
   totalPageNo: number;
   page: number;
@@ -31,7 +34,7 @@ const PaginationButton = ({ totalPageNo, page, setPage }: Props) => {
   return (
     <PaginationSection>
       <PageMoveButton type="button" onClick={handleClickPrev} disabled={pageGroup === 1}>
-        prev
+        <LeftArrowIcon />
       </PageMoveButton>
       {PAGE_INDEX.map((item) => {
         const pageNo = item + 5 * (pageGroup - 1);
@@ -44,7 +47,7 @@ const PaginationButton = ({ totalPageNo, page, setPage }: Props) => {
         }
       })}
       <PageMoveButton type="button" onClick={handleClickNext} disabled={pageGroup >= totalPageNo / 5}>
-        next
+        <RightArrowIcon />
       </PageMoveButton>
     </PaginationSection>
   );
@@ -73,6 +76,18 @@ const PageMoveButton = styled.button`
   height: 35px;
   border-radius: 2px;
   cursor: pointer;
+
+  &:disabled {
+    svg {
+      fill: ${colors.LIGHT_GREY};
+    }
+  }
+
+  svg {
+    width: 15px;
+    height: 15px;
+    fill: ${colors.TEXT_59};
+  }
 `;
 
 export default PaginationButton;
