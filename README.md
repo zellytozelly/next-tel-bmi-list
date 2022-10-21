@@ -1,34 +1,61 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## ✅ 프로젝트 실행방법
 
-## Getting Started
-
-First, run the development server:
+1. run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Open [http://localhost:3000](http://localhost:3000) with your browser
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## ✅ Deploy on Vercel
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+- 배포 사이트 :
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## ✅ 기술 스택
 
-## Learn More
+- 언어 : TypeScript
+- 프레임워크 : Next.js
+- UI 라이브러리 : Emotion
 
-To learn more about Next.js, take a look at the following resources:
+## ✅ TODO
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- 메인 페이지 `/contacts`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+  - 연락처 조회 리스트
 
-## Deploy on Vercel
+  - pagination / 10개 (별도의 컴포넌트)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- 검색 페이지 `/search`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+  - 연락처 검색
+
+  - infinite scroll / 10개
+
+- BMI 계산 페이지 `/bmi`
+
+  - BMI 계산
+
+    - input 이름/이메일주소(유효성검사)/신장/체중 (소수점 한자리)
+
+## ✅ 고려사항
+
+- 함수컴포넌트 구현
+- 모바일 화면 기준 구현
+
+## ✅ Tree
+
+- components
+  - IdCard // 연락처 카드 컴포넌트
+  - PaginationButton.tsx // 페이지네이션 버튼 컴포넌트
+  - FNB.tsx // 네비게이션
+- pages
+  - Contacts // 연락처 전체보기. 페이지네이션
+  - Search // 연락처 검색하기. 무한스크롤
+  - Bmi // BMI 계산
+  - \_app.js
+  - index.js
+
+## ✅ 추가 고려사항
+
+- 입력정보 유형에 최적화된 모바일 키보드 적용을 위해 input type 지정
