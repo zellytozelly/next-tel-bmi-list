@@ -67,6 +67,7 @@ const searchInputBox = css`
     width: 260px;
     height: 40px;
     border-radius: 10px 0 0 10px;
+    color: ${colors.TEXT_39};
     background-color: ${colors.LIGHT_BROWN};
   }
 `;

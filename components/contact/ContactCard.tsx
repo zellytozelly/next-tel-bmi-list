@@ -42,14 +42,14 @@ const ContactTextWrapper = styled.div`
   height: 40px;
   margin-top: 3px;
 
-  p:nth-child(1) {
+  p:nth-of-type(1) {
     margin: 0;
     font-size: 16px;
     line-height: 16px;
     color: ${colors.TEXT_39};
   }
 
-  p:nth-child(2) {
+  p:nth-of-type(2) {
     margin: 5px 0 0;
     font-size: 14px;
     line-height: 14px;
