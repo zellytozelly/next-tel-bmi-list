@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { DehydratedState, Hydrate, QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 import styled from '@emotion/styled';
 import { Global } from '@emotion/react';
 import '../styles/globals.css';
@@ -19,6 +20,7 @@ function MyApp({ Component, pageProps }: AppProps<{ dehydratedState: DehydratedS
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <Global styles={reset} />
@@ -29,6 +31,7 @@ function MyApp({ Component, pageProps }: AppProps<{ dehydratedState: DehydratedS
             </AppContainerBox>
           </BackgroundBox>
         </Hydrate>
+        <ReactQueryDevtools />
       </QueryClientProvider>
     </>
   );

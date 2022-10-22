@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { dehydrate, QueryClient, useQuery } from 'react-query';
+import { dehydrate, QueryClient, useQuery, useQueryClient } from 'react-query';
 import styled from '@emotion/styled';
 
 import { getContacts, getContactsCount } from '@/services/contact';
@@ -10,11 +10,16 @@ import HeaderTitle from '@/components/common/HeaderTitle';
 const Contacts = () => {
   const [page, setPage] = useState(1);
   const [totalPageNo, setTotalPageNo] = useState(0);
+  const queryClient = useQueryClient();
 
   const { isLoading, isError, data, isFetching } = useQuery(['contacts', page], () => getContacts({ page }), {
     keepPreviousData: true,
     refetchOnMount: false,
     refetchOnWindowFocus: false,
+    onSuccess: () => {
+      if (page === totalPageNo) return;
+      queryClient.prefetchQuery(['contacts', page + 1], () => getContacts({ page: page + 1 }));
+    },
   });
   if (isLoading) return <div>loading</div>;
   if (isError) return;
@@ -26,6 +31,10 @@ const Contacts = () => {
       setTotalPageNo(data / 10);
     };
     fetchContactsCount();
+  }, []);
+
+  useEffect(() => {
+    queryClient.prefetchQuery(['contacts', page + 1], () => getContacts({ page: page + 1 }));
   }, []);
 
   return (
