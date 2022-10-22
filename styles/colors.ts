@@ -10,10 +10,12 @@ const colors = {
   DARK_PINK: '#A239AB',
   DARK_RED: '#AB3939',
 
+  COFFEE_ORANGE: '#CDA788',
   DARK_BROWN: '#b6ada5',
   LIGHT_BROWN: '#f4f1ed',
 
   DARK_GREY: '#83786F',
+  GREY_AA: '#aaaaaa',
   LIGHT_GREY: '#d9d9d9',
 
   TEXT_59: '#595959',
