@@ -17,17 +17,19 @@ export const getContactsCount = async () => {
 interface GetContactsParams {
   page: number;
   search?: string;
+  signal: AbortSignal;
 }
 
 interface GetContactsResponse extends Contact {}
 
-export const getContacts = async ({ page, search = '' }: GetContactsParams) => {
+export const getContacts = async ({ page, search = '', signal }: GetContactsParams) => {
   const { data } = await axios.get<GetContactsResponse[]>(`${API_URL}${CONTACTS}`, {
     params: {
       page,
       limit: 10,
       search,
     },
+    signal,
   });
   return data;
 };

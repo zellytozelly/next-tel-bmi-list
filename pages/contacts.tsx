@@ -12,15 +12,21 @@ const Contacts = () => {
   const [totalPageNo, setTotalPageNo] = useState(0);
   const queryClient = useQueryClient();
 
-  const { isLoading, isError, data, isFetching } = useQuery(['contacts', page], () => getContacts({ page }), {
-    keepPreviousData: true,
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
-    onSuccess: () => {
-      if (page === totalPageNo) return;
-      queryClient.prefetchQuery(['contacts', page + 1], () => getContacts({ page: page + 1 }));
+  const { isLoading, isError, data, isFetching } = useQuery(
+    ['contacts', page],
+    ({ signal }) => getContacts({ page, signal: signal! }),
+    {
+      keepPreviousData: true,
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+      onSuccess: () => {
+        if (page === totalPageNo) return;
+        queryClient.prefetchQuery(['contacts', page + 1], ({ signal }) =>
+          getContacts({ page: page + 1, signal: signal! }),
+        );
+      },
     },
-  });
+  );
   if (isLoading) return <div>loading</div>;
   if (isError) return;
   if (!data) return;
@@ -34,7 +40,7 @@ const Contacts = () => {
   }, []);
 
   useEffect(() => {
-    queryClient.prefetchQuery(['contacts', page + 1], () => getContacts({ page: page + 1 }));
+    queryClient.prefetchQuery(['contacts', page + 1], ({ signal }) => getContacts({ page: page + 1, signal: signal! }));
   }, []);
 
   return (
@@ -56,7 +62,7 @@ export const getServerSideProps = async () => {
   const page = 1;
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery(['contacts', page], () => getContacts({ page }));
+  await queryClient.prefetchQuery(['contacts', page], ({ signal }) => getContacts({ page, signal: signal! }));
   return {
     props: {
       dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
