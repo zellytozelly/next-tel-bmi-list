@@ -1,4 +1,3 @@
-import type { NextPage } from 'next';
 import Link from 'next/link';
 import styled from '@emotion/styled';
 
@@ -7,7 +6,7 @@ import { HeaderTitle } from '@/components/common';
 import { MENU_DATA } from '@/constant';
 import { colors } from '@/styles/colors';
 
-const Home: NextPage = () => {
+const Home = () => {
   const menuList = MENU_DATA.slice(1);
 
   return (
@@ -15,13 +14,13 @@ const Home: NextPage = () => {
       <main>
         <HeaderTitle>Home</HeaderTitle>
         <ul>
-          {menuList.map((menu) => {
+          {menuList.map(({ name, path, description }) => {
             return (
-              <li key={menu.name}>
-                <Link href={menu.path}>
+              <li key={name}>
+                <Link href={path}>
                   <ColorBox>
-                    <p>{menu.name}</p>
-                    <span>{menu.description}</span>
+                    <p>{name}</p>
+                    <span>{description}</span>
                   </ColorBox>
                 </Link>
               </li>
@@ -42,7 +41,6 @@ const ColorBox = styled.div`
   cursor: pointer;
 
   p {
-    font-size: 16px;
     font-weight: bold;
     color: ${colors.COFFEE_BROWN};
     padding: 30px 0 10px 30px;

@@ -1,7 +1,12 @@
+import { colors } from '@/styles/colors';
+
 import HomeIcon from '@/assets/svg/home.svg';
 import ContactIcon from '@/assets/svg/contact.svg';
 import ContactBookIcon from '@/assets/svg/contact-book.svg';
 import BmiIcon from '@/assets/svg/weight.svg';
+
+// deploy url
+export const DEPLOY_URL = 'https://project-tel.vercel.app';
 
 // pagination
 export const PAGE_INDEX = [1, 2, 3, 4, 5];
@@ -22,4 +27,15 @@ export const MENU_DATA = [
     icon: <ContactBookIcon />,
   },
   { name: 'BMI 계산하기', path: '/bmi', description: '키와 몸무게로 건강 체크해보기!', icon: <BmiIcon /> },
+];
+
+// bmi
+export const BMI_COLOR_LIST = [
+  colors.LIGHT_GREY,
+  colors.DARK_YELLOW,
+  colors.DARK_GREEN,
+  colors.DARK_MINT,
+  colors.DARK_BLUE,
+  colors.DARK_PINK,
+  colors.DARK_RED,
 ];

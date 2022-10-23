@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Head from 'next/head';
 
 import { CalculateForm, Result } from '@/components/bmi';
@@ -8,10 +8,6 @@ const Bmi = () => {
   const [bmi, setBmi] = useState(0.0);
   const [isNext, setIsNext] = useState(false);
 
-  useEffect(() => {
-    setIsNext(false);
-  }, []);
-
   return (
     <>
       <Head>
@@ -19,8 +15,7 @@ const Bmi = () => {
       </Head>
       <div>
         <HeaderTitle>나의 BMI 계산하기</HeaderTitle>
-        {!isNext && <CalculateForm setBmi={setBmi} setIsNext={setIsNext} />}
-        {isNext && <Result bmi={bmi} setIsNext={setIsNext} />}
+        {!isNext ? <CalculateForm setBmi={setBmi} setIsNext={setIsNext} /> : <Result bmi={bmi} setIsNext={setIsNext} />}
       </div>
     </>
   );

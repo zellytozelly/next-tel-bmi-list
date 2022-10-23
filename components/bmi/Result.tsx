@@ -3,6 +3,7 @@ import Image from 'next/future/image';
 import styled from '@emotion/styled';
 
 import { checkBmiRange } from '@/utils/bmi';
+import { BMI_COLOR_LIST } from '@/constant';
 import { colors } from '@/styles/colors';
 
 import HealthImage from '@/assets/image/health.png';
@@ -12,20 +13,9 @@ interface Props {
   setIsNext: Dispatch<SetStateAction<boolean>>;
 }
 
-const BMI_COLOR_LIST = [
-  colors.LIGHT_GREY,
-  colors.DARK_YELLOW,
-  colors.DARK_GREEN,
-  colors.DARK_MINT,
-  colors.DARK_BLUE,
-  colors.DARK_PINK,
-  colors.DARK_RED,
-];
-
 const Result = ({ bmi, setIsNext }: Props) => {
-  const rangeArray = useMemo(() => {
-    return checkBmiRange(bmi);
-  }, [bmi]);
+  const rangeArray = checkBmiRange(bmi);
+  const BMI_VALUES = [0, 18.5, 23, 25, 30, 35];
 
   const handleClickRestart = () => {
     setIsNext(false);
@@ -42,24 +32,13 @@ const Result = ({ bmi, setIsNext }: Props) => {
       </BmiTextBox>
 
       <ColorList>
-        <ColorItem colorCode={1} activeCode={rangeArray.id}>
-          0
-        </ColorItem>
-        <ColorItem colorCode={2} activeCode={rangeArray.id}>
-          18.5
-        </ColorItem>
-        <ColorItem colorCode={3} activeCode={rangeArray.id}>
-          23
-        </ColorItem>
-        <ColorItem colorCode={4} activeCode={rangeArray.id}>
-          25
-        </ColorItem>
-        <ColorItem colorCode={5} activeCode={rangeArray.id}>
-          30
-        </ColorItem>
-        <ColorItem colorCode={6} activeCode={rangeArray.id}>
-          35
-        </ColorItem>
+        {BMI_VALUES.map((value, index) => {
+          return (
+            <ColorItem key={value} colorCode={index + 1} activeCode={rangeArray.id}>
+              {value}
+            </ColorItem>
+          );
+        })}
       </ColorList>
 
       <RestartButton type="button" onClick={handleClickRestart}>
@@ -120,7 +99,7 @@ const ColorItem = styled.li<ColorItemProps>`
 `;
 
 const RestartButton = styled.button`
-  margin-top: 100px;
+  margin-top: 60px;
   width: 100%;
   height: 46px;
   font-size: 18px;

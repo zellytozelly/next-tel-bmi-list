@@ -9,9 +9,9 @@ export const checkBmiRange = (bmi: number) => {
   ];
 
   if (bmi >= 0 && bmi <= 18.4) return bmiRangeList[0];
-  else if (bmi <= 22.9) return bmiRangeList[1];
-  else if (bmi <= 24.9) return bmiRangeList[2];
-  else if (bmi <= 29.9) return bmiRangeList[3];
-  else if (bmi <= 34.9) return bmiRangeList[4];
-  else return bmiRangeList[5];
+  if (bmi <= 22.9) return bmiRangeList[1];
+  if (bmi <= 24.9) return bmiRangeList[2];
+  if (bmi <= 29.9) return bmiRangeList[3];
+  if (bmi <= 34.9) return bmiRangeList[4];
+  return bmiRangeList[5];
 };

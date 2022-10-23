@@ -13,13 +13,13 @@ const FNB = () => {
     <Footer>
       <nav>
         <NavList>
-          {MENU_DATA.map((menu) => {
+          {MENU_DATA.map(({ name, path, icon }) => {
             return (
-              <li key={menu.name}>
-                <Link href={menu.path}>
-                  <LinkBox isActive={currentRoute === menu.path}>
-                    {menu.icon}
-                    <span>{menu.name}</span>
+              <li key={name}>
+                <Link href={path}>
+                  <LinkBox isActive={currentRoute === path}>
+                    {icon}
+                    <span>{name}</span>
                   </LinkBox>
                 </Link>
               </li>
