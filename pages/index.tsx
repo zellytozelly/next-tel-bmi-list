@@ -1,14 +1,57 @@
 import type { NextPage } from 'next';
-import styles from '@/styles/Home.module.css';
+import Link from 'next/link';
+
+import HeaderTitle from '@/components/common/HeaderTitle';
+import { MENU_DATA } from '@/constant';
+import styled from '@emotion/styled';
+import { colors } from '@/styles/colors';
 
 const Home: NextPage = () => {
+  const menuList = MENU_DATA.slice(1);
+
   return (
-    <div className={styles.container}>
-      <main className={styles.main}>
-        <p>hello</p>
+    <div>
+      <main>
+        <HeaderTitle>Home</HeaderTitle>
+        <ul>
+          {menuList.map((menu) => {
+            return (
+              <li key={menu.name}>
+                <Link href={menu.path}>
+                  <ColorBox>
+                    <p>{menu.name}</p>
+                    <span>{menu.description}</span>
+                  </ColorBox>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
       </main>
     </div>
   );
 };
+
+const ColorBox = styled.div`
+  margin-top: 20px;
+  width: 100%;
+  height: 140px;
+  border-radius: 10px;
+  background-color: ${colors.LIGHT_BROWN};
+  cursor: pointer;
+
+  p {
+    font-size: 16px;
+    font-weight: bold;
+    color: ${colors.COFFEE_BROWN};
+    padding: 30px 0 10px 30px;
+  }
+
+  span {
+    font-size: 14px;
+    color: ${colors.COFFEE_ORANGE};
+    padding: 30px;
+  }
+`;
 
 export default Home;
