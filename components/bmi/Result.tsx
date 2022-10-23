@@ -1,8 +1,11 @@
 import { Dispatch, SetStateAction, useMemo } from 'react';
+import Image from 'next/future/image';
 import styled from '@emotion/styled';
 
 import { checkBmiRange } from '@/utils/bmi';
 import { colors } from '@/styles/colors';
+
+import HealthImage from '@/assets/image/health.png';
 
 interface Props {
   bmi: number;
@@ -30,6 +33,7 @@ const Result = ({ bmi, setIsNext }: Props) => {
 
   return (
     <div>
+      <BmiImage src={HealthImage} alt="bmi-result" />
       <BmiTextBox>
         <p>나의 BMI 지수</p>
         <p>
@@ -64,6 +68,11 @@ const Result = ({ bmi, setIsNext }: Props) => {
     </div>
   );
 };
+
+const BmiImage = styled(Image)`
+  width: 100%;
+  height: 100%;
+`;
 
 const BmiTextBox = styled.div`
   margin-top: 30px;
@@ -111,7 +120,7 @@ const ColorItem = styled.li<ColorItemProps>`
 `;
 
 const RestartButton = styled.button`
-  margin-top: 60px;
+  margin-top: 100px;
   width: 100%;
   height: 46px;
   font-size: 18px;

@@ -26,7 +26,9 @@ const MyApp = ({ Component, pageProps }: AppProps<{ dehydratedState: DehydratedS
           <Global styles={globals} />
           <BackgroundBox>
             <AppContainerBox>
-              <Component {...pageProps} />
+              <AppBox>
+                <Component {...pageProps} />
+              </AppBox>
               <FNB />
             </AppContainerBox>
           </BackgroundBox>
@@ -47,8 +49,11 @@ const BackgroundBox = styled.div`
 const AppContainerBox = styled.div`
   width: 390px;
   height: 100vh;
-  padding: 0 30px;
   background-color: #ffffff;
+`;
+
+const AppBox = styled.div`
+  padding: 0 30px;
 `;
 
 export default MyApp;

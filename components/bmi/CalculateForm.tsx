@@ -22,12 +22,16 @@ const CalculateForm = ({ setBmi, setIsNext }: Props) => {
 
   const handleSubmitBmi = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const isPassedEmail = EMAIL_REGEXP.test(input.email);
+    const { email, height, weight } = input;
+
+    const isPassedEmail = EMAIL_REGEXP.test(email);
     setIsValidEmail(isPassedEmail);
-    const heightFloat = Number(input.height) / 100;
-    const weightFloat = Number(input.weight);
+
+    const heightFloat = Number(height) / 100;
+    const weightFloat = Number(weight);
     const calculateBmi = Number((weightFloat / (heightFloat * heightFloat)).toFixed(1));
     setBmi(calculateBmi);
+
     if (isPassedEmail) setIsNext(true);
   };
 
@@ -48,7 +52,7 @@ const CalculateForm = ({ setBmi, setIsNext }: Props) => {
     <form onSubmit={handleSubmitBmi}>
       <InputBox>
         <InputText>이름</InputText>
-        <Input type="text" name="name" value={input.name} onChange={handleChangeInput} />
+        <Input type="text" name="name" value={input.name} autoComplete="off" onChange={handleChangeInput} />
       </InputBox>
 
       <InputBox>
@@ -59,9 +63,10 @@ const CalculateForm = ({ setBmi, setIsNext }: Props) => {
           value={input.email}
           placeholder="example@gmail.com"
           inputMode="email"
+          autoComplete="off"
           onChange={handleChangeInput}
         />
-        {!isValidEmail && input.email && <InputValidText>유효한 이메일로 작성해주세요.</InputValidText>}
+        {!isValidEmail && input.email && <InputValidText>올바른 이메일 형식으로 작성해주세요.</InputValidText>}
       </InputBox>
 
       <InputBox>
@@ -98,7 +103,7 @@ const CalculateForm = ({ setBmi, setIsNext }: Props) => {
 };
 
 const InputBox = styled.div`
-  padding-top: 15px;
+  padding-top: 30px;
 `;
 
 const InputText = styled.p`
@@ -135,7 +140,7 @@ interface CalculateButtonProps {
   isActive: boolean;
 }
 const CalculateButton = styled.button<CalculateButtonProps>`
-  margin-top: 20px;
+  margin-top: 30px;
   width: 100%;
   height: 46px;
   font-size: 18px;
