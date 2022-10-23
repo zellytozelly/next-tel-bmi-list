@@ -8,7 +8,7 @@ import { Global } from '@emotion/react';
 import globals from '@/styles/globals';
 import '@/styles/reset.css';
 
-import FNB from '@/components/footer/FNB';
+import FNB from '@/components/fnb/FNB';
 
 const MyApp = ({ Component, pageProps }: AppProps<{ dehydratedState: DehydratedState }>) => {
   const [queryClient] = useState(() => new QueryClient());
