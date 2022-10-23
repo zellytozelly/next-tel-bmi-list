@@ -54,6 +54,7 @@ const ContactSearch = ({ setQuery }: Props) => {
 
 const SearchForm = styled.form`
   display: flex;
+  justify-content: center;
 `;
 
 const SearchInputBox = styled.div`
@@ -63,7 +64,7 @@ const SearchInputBox = styled.div`
     padding: 10px 40px 10px 20px;
     font-size: 16px;
     line-height: 16px;
-    width: 260px;
+    width: 100%;
     height: 40px;
     border-radius: 10px 0 0 10px;
     color: ${colors.TEXT_39};
@@ -81,22 +82,22 @@ const DeleteAllButton = styled.button`
   cursor: pointer;
 
   svg {
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
     fill: ${colors.TEXT_39};
   }
 `;
 
 const SearchButton = styled.button`
-  width: 70px;
+  width: 50px;
   height: 40px;
   border-radius: 0 10px 10px 0;
   background-color: ${colors.DARK_BROWN};
   cursor: pointer;
 
   svg {
-    width: 26px;
-    height: 26px;
+    width: 22px;
+    height: 22px;
     fill: ${colors.TEXT_39};
   }
 `;
