@@ -79,6 +79,7 @@ const Target = styled.div`
 `;
 
 const ErrorText = styled.p`
+  margin-top: 20px;
   text-align: center;
 `;
 

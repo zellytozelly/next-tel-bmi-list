@@ -3,14 +3,15 @@
 1. run the development server:
 
 ```bash
-npm run dev
+$ npm i
+$ npm run dev
 ```
 
 2. Open [http://localhost:3000](http://localhost:3000) with your browser
 
 ## ✅ Deploy on Vercel
 
-- 배포 사이트 :
+- 배포 사이트 : [https://project-tel.vercel.app/](https://project-tel.vercel.app/)
 
 ## ✅ 기술 스택
 
@@ -53,9 +54,9 @@ npm run dev
   - Contacts // 연락처 전체보기. 페이지네이션
   - Search // 연락처 검색하기. 무한스크롤
   - Bmi // BMI 계산
-  - \_app.js
-  - index.js
+  - \_app.tsx
+  - index.tsx
 
 ## ✅ 추가 고려사항
 
-- 입력정보 유형에 최적화된 모바일 키보드 적용을 위해 input type 지정
+- 입력정보 유형에 최적화된 모바일 키보드 적용을 위해 input type / inputMode 지정

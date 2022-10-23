@@ -6,6 +6,7 @@ import { colors } from '@/styles/colors';
 
 import LeftArrowIcon from '@/assets/svg/left-arrow.svg';
 import RightArrowIcon from '@/assets/svg/right-arrow.svg';
+import { getNextPage, getPrevPage } from '@/utils/contact';
 
 interface Props {
   totalPageNo: number;
@@ -14,16 +15,14 @@ interface Props {
 }
 
 const PaginationButton = ({ totalPageNo, page, setPage }: Props) => {
-  const [pageGroup, setPageGroup] = useState(1);
+  const pageGroup = Math.ceil(page / 5);
 
   const handleClickPrev = () => {
-    setPageGroup((prev) => prev - 1);
-    setPage((pageGroup - 1) * 5);
+    setPage(getPrevPage(page));
   };
 
   const handleClickNext = () => {
-    setPageGroup((prev) => prev + 1);
-    setPage(pageGroup * 5 + 1);
+    setPage(getNextPage(page));
   };
 
   const handleClickPage = (e: MouseEvent<HTMLButtonElement>) => {
