@@ -3,15 +3,15 @@ import { dehydrate, QueryClient, useQuery, useQueryClient } from 'react-query';
 import Head from 'next/head';
 import styled from '@emotion/styled';
 
-import { getContacts, getContactsCount } from '@/services/contact';
+import { getContacts, getContactsTotalPage } from '@/services/contact';
 import { HeaderTitle, PaginationButton } from '@/components/common';
 import { Card } from '@/components/contact';
 
 const Contacts = () => {
   const [page, setPage] = useState(1);
-  const [totalPageNo, setTotalPageNo] = useState(0);
   const queryClient = useQueryClient();
 
+  const { data: totalPageNo } = useQuery(['totalPageNo'], ({ signal }) => getContactsTotalPage({ signal: signal! }));
   const { isLoading, isError, data } = useQuery(
     ['contacts', page],
     ({ signal }) => getContacts({ page, signal: signal! }),
@@ -23,21 +23,13 @@ const Contacts = () => {
   );
 
   useEffect(() => {
-    const fetchContactsCount = async () => {
-      const count = await getContactsCount();
-      setTotalPageNo(count / 10);
-    };
-    fetchContactsCount();
-  }, []);
-
-  useEffect(() => {
     if (page === totalPageNo) return;
     queryClient.prefetchQuery(['contacts', page + 1], ({ signal }) => getContacts({ page: page + 1, signal: signal! }));
   }, [page, queryClient, totalPageNo]);
 
   if (isLoading) return <div>loading</div>;
   if (isError) return;
-  if (!data) return;
+  if (!data || !totalPageNo) return;
 
   return (
     <>
@@ -63,6 +55,7 @@ export const getServerSideProps = async () => {
   const page = 1;
   const queryClient = new QueryClient();
 
+  await queryClient.prefetchQuery(['totalPageNo'], ({ signal }) => getContactsTotalPage({ signal: signal! }));
   await queryClient.prefetchQuery(['contacts', page], ({ signal }) => getContacts({ page, signal: signal! }));
   return {
     props: {
@@ -75,7 +68,7 @@ const ContactSection = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow: scroll;
+  overflow-y: scroll;
   height: 500px;
 `;
 
