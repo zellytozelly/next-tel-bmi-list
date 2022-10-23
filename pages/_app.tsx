@@ -10,7 +10,7 @@ import '@/styles/reset.css';
 
 import FNB from '@/components/footer/FNB';
 
-function MyApp({ Component, pageProps }: AppProps<{ dehydratedState: DehydratedState }>) {
+const MyApp = ({ Component, pageProps }: AppProps<{ dehydratedState: DehydratedState }>) => {
   const [queryClient] = useState(() => new QueryClient());
   return (
     <>
@@ -35,7 +35,7 @@ function MyApp({ Component, pageProps }: AppProps<{ dehydratedState: DehydratedS
       </QueryClientProvider>
     </>
   );
-}
+};
 
 const BackgroundBox = styled.div`
   display: flex;

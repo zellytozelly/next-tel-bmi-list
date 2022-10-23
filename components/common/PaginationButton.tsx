@@ -27,9 +27,9 @@ const PaginationButton = ({ totalPageNo, page, setPage }: Props) => {
   };
 
   const handleClickPage = (e: MouseEvent<HTMLButtonElement>) => {
-    const { page } = e.currentTarget.dataset;
-    if (!page) return;
-    setPage(parseInt(page, 10));
+    const { page: buttonPageNo } = e.currentTarget.dataset;
+    if (!buttonPageNo) return;
+    setPage(parseInt(buttonPageNo, 10));
   };
   return (
     <PaginationSection>

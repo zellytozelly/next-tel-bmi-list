@@ -8,7 +8,7 @@
     "plugin:react-hooks/recommended",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommand"
+    "plugin:prettier/recommended"
   ],
   "overrides": [],
   "parser": "@typescript-eslint/parser",
@@ -35,7 +35,6 @@
     "prettier/prettier": ["error", { "endOfLine": "auto" }],
     "react/jsx-one-expression-per-line": "off",
     "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
-    "react/jsx-indent": "warn",
     "react/jsx-props-no-spreading": "off",
     "react/no-array-index-key": "warn",
     "react/require-default-props": "off",
@@ -48,7 +47,7 @@
     "import/no-anonymous-default-export": "off",
     "no-param-reassign": ["error", { "props": false }],
     "no-use-before-define": "off",
-    "@typescript-eslint/no-use-before-define": ["error"],
+    "@typescript-eslint/no-use-before-define": ["off"],
     "no-shadow": "off",
     "no-unused-expressions": ["warn"],
     "@typescript-eslint/no-shadow": ["error"],
@@ -63,7 +62,7 @@
     "lines-between-class-members": "off",
     "jsx-a11y/click-events-have-key-events": "off",
     "jsx-a11y/label-has-associated-control": [
-      "error",
+      "off",
       {
         "labelComponents": ["label"],
         "labelAttributes": ["htmlFor"],
@@ -71,7 +70,7 @@
       }
     ],
     "import/extensions": [
-      "error",
+      "off",
       "ignorePackages",
       {
         "js": "never",

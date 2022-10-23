@@ -14,7 +14,7 @@ const Search = () => {
 
   const { data, isFetching, fetchNextPage, hasNextPage } = useInfiniteQuery(
     ['contacts', query],
-    ({ pageParam = 1 }) => getContacts({ page: pageParam, search: query }),
+    ({ pageParam = 1, signal }) => getContacts({ page: pageParam, search: query, signal: signal! }),
     {
       enabled: !!query,
       getNextPageParam: (lastPage) => {
@@ -40,8 +40,8 @@ const Search = () => {
 
   useEffect(() => {
     const fetchContactsCount = async () => {
-      const data = await getContactsCount();
-      setTotalPageNo(data / 10);
+      const contactsCount = await getContactsCount();
+      setTotalPageNo(contactsCount / 10);
     };
     fetchContactsCount();
   }, []);

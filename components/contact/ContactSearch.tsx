@@ -1,10 +1,9 @@
-/** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
 import { ChangeEvent, Dispatch, FormEvent, SetStateAction, useRef, useState } from 'react';
+import styled from '@emotion/styled';
 
+import { colors } from '@/styles/colors';
 import DeleteAllIcon from '@/assets/svg/delete-all.svg';
 import SearchIcon from '@/assets/svg/search.svg';
-import { colors } from '@/styles/colors';
 
 interface Props {
   setQuery: Dispatch<SetStateAction<string>>;
@@ -33,8 +32,8 @@ const ContactSearch = ({ setQuery }: Props) => {
   };
 
   return (
-    <form css={searchForm} onSubmit={handleSubmitSearch}>
-      <div css={searchInputBox}>
+    <SearchForm onSubmit={handleSubmitSearch}>
+      <SearchInputBox>
         <input
           type="text"
           value={searchValue}
@@ -42,22 +41,22 @@ const ContactSearch = ({ setQuery }: Props) => {
           placeholder="이름을 입력해주세요"
           onChange={handleChangeSearch}
         />
-        <button type="button" css={deleteAllButton} onClick={handleClickDeleteAll}>
+        <DeleteAllButton type="button" onClick={handleClickDeleteAll}>
           <DeleteAllIcon />
-        </button>
-      </div>
-      <button type="submit" css={searchButton}>
+        </DeleteAllButton>
+      </SearchInputBox>
+      <SearchButton type="submit">
         <SearchIcon />
-      </button>
-    </form>
+      </SearchButton>
+    </SearchForm>
   );
 };
 
-const searchForm = css`
+const SearchForm = styled.form`
   display: flex;
 `;
 
-const searchInputBox = css`
+const SearchInputBox = styled.div`
   position: relative;
 
   input {
@@ -72,7 +71,7 @@ const searchInputBox = css`
   }
 `;
 
-const deleteAllButton = css`
+const DeleteAllButton = styled.button`
   position: absolute;
   top: 0;
   right: 0;
@@ -88,7 +87,7 @@ const deleteAllButton = css`
   }
 `;
 
-const searchButton = css`
+const SearchButton = styled.button`
   width: 70px;
   height: 40px;
   border-radius: 0 10px 10px 0;
