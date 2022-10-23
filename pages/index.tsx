@@ -1,9 +1,10 @@
 import type { NextPage } from 'next';
 import Link from 'next/link';
-
-import HeaderTitle from '@/components/common/HeaderTitle';
-import { MENU_DATA } from '@/constant';
 import styled from '@emotion/styled';
+
+import { HeaderTitle } from '@/components/common';
+
+import { MENU_DATA } from '@/constant';
 import { colors } from '@/styles/colors';
 
 const Home: NextPage = () => {

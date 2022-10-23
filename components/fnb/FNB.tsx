@@ -36,6 +36,7 @@ const Footer = styled.footer`
   width: inherit;
   padding: 16px;
   bottom: 0;
+  background-color: ${colors.WHITE};
   box-shadow: rgba(50, 50, 93, 0.25) 0px -2px 3px -3px, rgba(0, 0, 0, 0.3) 0px -1px 1px -1px;
 `;
 
