@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useInfiniteQuery } from 'react-query';
+import Head from 'next/head';
 import styled from '@emotion/styled';
 
 import { useIntersect } from '@/hooks';
 import { getContacts, getContactsCount } from '@/services/contact';
-import HeaderTitle from '@/components/common/HeaderTitle';
-import ContactSearch from '@/components/contact/ContactSearch';
-import ContactCard from '@/components/contact/ContactCard';
+import { HeaderTitle } from '@/components/common';
+import { Card, SearchForm } from '@/components/contact';
 
 const Search = () => {
   const [query, setQuery] = useState('');
@@ -47,18 +47,23 @@ const Search = () => {
   }, []);
 
   return (
-    <div>
-      <HeaderTitle>연락처 검색하기</HeaderTitle>
-      <ContactSearch setQuery={setQuery} />
-      <ContactSection>
-        <ContactCardWrapper>
-          {contacts.map((item) => (
-            <ContactCard key={item.id} item={item} />
-          ))}
-          <Target ref={ref} />
-        </ContactCardWrapper>
-      </ContactSection>
-    </div>
+    <>
+      <Head>
+        <title>연락처 검색 - 해피문데이</title>
+      </Head>
+      <div>
+        <HeaderTitle>연락처 검색하기</HeaderTitle>
+        <SearchForm setQuery={setQuery} />
+        <ContactSection>
+          <ContactCardWrapper>
+            {contacts.map((item) => (
+              <Card key={item.id} item={item} />
+            ))}
+            <Target ref={ref} />
+          </ContactCardWrapper>
+        </ContactSection>
+      </div>
+    </>
   );
 };
 

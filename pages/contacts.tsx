@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { dehydrate, QueryClient, useQuery, useQueryClient } from 'react-query';
+import Head from 'next/head';
 import styled from '@emotion/styled';
 
 import { getContacts, getContactsCount } from '@/services/contact';
-import ContactCard from '@/components/contact/ContactCard';
-import Pagination from '@/components/common/PaginationButton';
-import HeaderTitle from '@/components/common/HeaderTitle';
+import { HeaderTitle, PaginationButton } from '@/components/common';
+import { Card } from '@/components/contact';
 
 const Contacts = () => {
   const [page, setPage] = useState(1);
@@ -40,17 +40,22 @@ const Contacts = () => {
   if (!data) return;
 
   return (
-    <div>
-      <HeaderTitle>연락처 전체보기</HeaderTitle>
-      <ContactSection>
-        <ContactCardWrapper>
-          {data.map((item) => {
-            return <ContactCard key={item.id} item={item} />;
-          })}
-        </ContactCardWrapper>
-        <Pagination totalPageNo={totalPageNo} page={page} setPage={setPage} />
-      </ContactSection>
-    </div>
+    <>
+      <Head>
+        <title>연락처 - 해피문데이</title>
+      </Head>
+      <div>
+        <HeaderTitle>연락처 전체보기</HeaderTitle>
+        <ContactSection>
+          <ContactCardWrapper>
+            {data.map((item) => {
+              return <Card key={item.id} item={item} />;
+            })}
+          </ContactCardWrapper>
+          <PaginationButton totalPageNo={totalPageNo} page={page} setPage={setPage} />
+        </ContactSection>
+      </div>
+    </>
   );
 };
 
