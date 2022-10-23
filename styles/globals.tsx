@@ -29,7 +29,7 @@ const globals = css`
   }
 
   ::-webkit-scrollbar {
-    display: none;
+    /* display: none; */
   }
 
   * {

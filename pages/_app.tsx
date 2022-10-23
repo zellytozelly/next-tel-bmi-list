@@ -9,6 +9,9 @@ import globals from '@/styles/globals';
 import '@/styles/reset.css';
 
 import { FNB } from '@/components/fnb';
+import { DEPLOY_URL } from '@/constant';
+
+const META_DATA = { title: '해피문데이', description: '해피문데이 : 연락처 목록 검색 & BMI 계산하기' };
 
 const MyApp = ({ Component, pageProps }: AppProps<{ dehydratedState: DehydratedState }>) => {
   const [queryClient] = useState(() => new QueryClient());
@@ -16,8 +19,13 @@ const MyApp = ({ Component, pageProps }: AppProps<{ dehydratedState: DehydratedS
     <>
       <Head>
         <title>해피문데이</title>
-        <meta name="description" content="연락처 목록 검색 & BMI 계산하기" />
+        <meta name="description" content={META_DATA.description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta property="og:title" content={META_DATA.title} />
+        <meta property="og:description" content={META_DATA.description} />
+        <meta property="og:url" content={DEPLOY_URL} />
+        <meta name="twitter:title" content={META_DATA.title} key="tw-title" />
+        <meta name="twitter:description" content={META_DATA.description} key="tw-desc" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 

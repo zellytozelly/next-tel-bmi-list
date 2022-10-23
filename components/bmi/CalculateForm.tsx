@@ -118,6 +118,7 @@ const Input = styled.input`
   height: 46px;
   font-size: 16px;
   color: ${colors.TEXT_39};
+  background-color: ${colors.WHITE};
   border-radius: 10px;
   border: solid 1px;
   border-color: ${colors.LIGHT_GREY};

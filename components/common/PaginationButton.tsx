@@ -56,7 +56,7 @@ const PaginationButton = ({ totalPageNo, page, setPage }: Props) => {
 const PaginationSection = styled.section`
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin: 20px 0;
 `;
 
 interface PageButtonProps {
@@ -75,9 +75,12 @@ const PageMoveButton = styled.button`
   width: 35px;
   height: 35px;
   border-radius: 2px;
+  background-color: ${colors.LIGHT_GREY};
   cursor: pointer;
 
   &:disabled {
+    background-color: ${colors.WHITE};
+
     svg {
       fill: ${colors.LIGHT_GREY};
     }
