@@ -64,7 +64,7 @@ const ContactSection = styled.section`
   flex-direction: column;
   align-items: center;
   overflow-y: scroll;
-  height: 500px;
+  height: 80vh;
 `;
 
 const ContactCardWrapper = styled.ul`

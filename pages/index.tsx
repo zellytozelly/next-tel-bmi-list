@@ -29,6 +29,11 @@ const Home = () => {
   );
 };
 
+// NOTE: 500 Error Text
+// export async function getServerSideProps() {
+//   throw new TypeError("Couldn't return a reasonable response.");
+// }
+
 const ColorBox = styled.div`
   margin-top: 20px;
   width: 100%;
