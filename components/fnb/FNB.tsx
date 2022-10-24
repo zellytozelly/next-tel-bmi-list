@@ -1,10 +1,10 @@
 import Link from 'next/link';
-import { MouseEvent } from 'react';
+import { MouseEvent, useMemo } from 'react';
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 import { useUpdateAtom } from 'jotai/utils';
 
-import { headerTextAtom } from '@/store/headerAtom';
+import { headerTextAtom } from '@/store/headerAtoms';
 import { colors } from '@/styles/colors';
 import { MENU_DATA } from '@/constant';
 
@@ -19,6 +19,11 @@ const FNB = () => {
     setHeaderAtom(name);
   };
 
+  const pathRegexp = useMemo(() => {
+    const regexp = !currentRoute.slice(1) ? '^/$' : `${currentRoute.slice(1).split('/')[0]}`;
+    return new RegExp(`${regexp}`, 'g');
+  }, [currentRoute]);
+
   return (
     <Footer>
       <nav>
@@ -28,7 +33,7 @@ const FNB = () => {
               <li key={name}>
                 <NavButton type="button" data-name={name} onClick={handleClickMenu}>
                   <Link href={path}>
-                    <LinkBox isActive={currentRoute === path}>
+                    <LinkBox isActive={pathRegexp.test(path)}>
                       {icon}
                       <span>{name}</span>
                     </LinkBox>

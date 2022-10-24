@@ -14,7 +14,7 @@ import { FNB } from '@/components/fnb';
 import { DEPLOY_URL } from '@/constant';
 import Spinner from '@/components/common/Spinner';
 import { Header } from '@/components/header';
-import { headerTextAtom } from '@/store/headerAtom';
+import { headerTextAtom } from '@/store/headerAtoms';
 import { useLoading } from '@/hooks';
 
 const META_DATA = { title: '해피문데이', description: '해피문데이 : 연락처 목록 검색 & BMI 계산하기' };
