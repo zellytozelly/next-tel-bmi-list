@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import { Router } from 'next/router';
 import { DehydratedState, Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import styled from '@emotion/styled';
@@ -10,11 +11,33 @@ import '@/styles/reset.css';
 
 import { FNB } from '@/components/fnb';
 import { DEPLOY_URL } from '@/constant';
+import Spinner from '@/components/common/Spinner';
 
 const META_DATA = { title: '해피문데이', description: '해피문데이 : 연락처 목록 검색 & BMI 계산하기' };
 
 const MyApp = ({ Component, pageProps }: AppProps<{ dehydratedState: DehydratedState }>) => {
   const [queryClient] = useState(() => new QueryClient());
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const start = () => {
+      console.log('start');
+      setLoading(true);
+    };
+    const end = () => {
+      console.log('finished');
+      setLoading(false);
+    };
+    Router.events.on('routeChangeStart', start);
+    Router.events.on('routeChangeComplete', end);
+    Router.events.on('routeChangeError', end);
+    return () => {
+      Router.events.off('routeChangeStart', start);
+      Router.events.off('routeChangeComplete', end);
+      Router.events.off('routeChangeError', end);
+    };
+  }, []);
+
   return (
     <>
       <Head>
@@ -35,7 +58,13 @@ const MyApp = ({ Component, pageProps }: AppProps<{ dehydratedState: DehydratedS
           <BackgroundBox>
             <AppContainerBox>
               <AppBox>
-                <Component {...pageProps} />
+                {loading ? (
+                  <SpinnerBox>
+                    <Spinner />
+                  </SpinnerBox>
+                ) : (
+                  <Component {...pageProps} />
+                )}
               </AppBox>
               <FNB />
             </AppContainerBox>
@@ -62,6 +91,13 @@ const AppContainerBox = styled.div`
 
 const AppBox = styled.div`
   padding: 0 30px;
+`;
+
+const SpinnerBox = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
 
 export default MyApp;
