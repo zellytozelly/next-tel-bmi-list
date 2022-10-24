@@ -1,35 +1,17 @@
 import { useState } from 'react';
-import { useInfiniteQuery, useQuery } from 'react-query';
 import Head from 'next/head';
 import styled from '@emotion/styled';
 
 import { useIntersect } from '@/hooks';
-import { getContacts, getContactsTotalPage } from '@/services/contact';
+import { useContactByQuery, useTotalPageNoByQuery } from '@/hooks/queries';
 import { Card, SearchForm } from '@/components/contact';
 import Spinner from '@/components/common/Spinner';
-import { contactKeys } from '@/constant/queryKeys';
 
 const Search = () => {
   const [query, setQuery] = useState('');
 
-  const { data: totalPageNo } = useQuery(contactKeys.totalPageNoByQuery(query), ({ signal }) =>
-    getContactsTotalPage({ search: query, signal: signal! }),
-  );
-  const { data, isFetching, fetchNextPage, hasNextPage } = useInfiniteQuery(
-    contactKeys.contactByQuery(query),
-    ({ pageParam = 1, signal }) => getContacts({ page: pageParam, search: query, signal: signal! }),
-    {
-      enabled: !!query,
-      getNextPageParam: (lastPage, allPage) => {
-        if (!totalPageNo || lastPage.length === 0) return;
-        const lastPageIdNo = lastPage.length;
-        if (lastPageIdNo % 10) return;
-        const nextPageNo = (lastPageIdNo / 10) * allPage.length + 1;
-        if (nextPageNo > totalPageNo) return;
-        return nextPageNo;
-      },
-    },
-  );
+  const { data: totalPageNo } = useTotalPageNoByQuery(query);
+  const { data, isFetching, fetchNextPage, hasNextPage } = useContactByQuery({ query, totalPageNo });
 
   const ref = useIntersect(async (entry, observer) => {
     observer.unobserve(entry.target);

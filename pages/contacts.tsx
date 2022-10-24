@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { dehydrate, QueryClient, useQuery, useQueryClient } from 'react-query';
+import { dehydrate, QueryClient, useQueryClient } from 'react-query';
 import Head from 'next/head';
 import styled from '@emotion/styled';
 
+import { useContactPerPageQuery, useTotalPageNoQuery } from '@/hooks/queries';
 import { getContacts, getContactsTotalPage } from '@/services/contact';
 import { PaginationButton } from '@/components/common';
 import { Card } from '@/components/contact';
@@ -12,18 +13,8 @@ const Contacts = () => {
   const [page, setPage] = useState(1);
   const queryClient = useQueryClient();
 
-  const { data: totalPageNo } = useQuery(contactKeys.totalPageNo, ({ signal }) =>
-    getContactsTotalPage({ signal: signal! }),
-  );
-  const { isLoading, isError, data } = useQuery(
-    contactKeys.contactPerPage(page),
-    ({ signal }) => getContacts({ page, signal: signal! }),
-    {
-      keepPreviousData: true,
-      refetchOnMount: false,
-      refetchOnWindowFocus: false,
-    },
-  );
+  const { data: totalPageNo } = useTotalPageNoQuery();
+  const { isLoading, isError, data } = useContactPerPageQuery(page);
 
   useEffect(() => {
     if (page === totalPageNo) return;
