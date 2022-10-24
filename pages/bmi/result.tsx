@@ -1,25 +1,30 @@
-import { Dispatch, SetStateAction, useMemo } from 'react';
 import Image from 'next/future/image';
 import styled from '@emotion/styled';
+import { useAtom } from 'jotai';
 
 import { checkBmiRange } from '@/utils/bmi';
 import { BMI_COLOR_LIST } from '@/constant';
+import { bmiValueAtom } from '@/store/bmiAtoms';
 import { colors } from '@/styles/colors';
 
 import HealthImage from '@/assets/image/health.png';
+import Router from 'next/router';
+import { useEffect } from 'react';
 
-interface Props {
-  bmi: number;
-  setIsNext: Dispatch<SetStateAction<boolean>>;
-}
-
-const Result = ({ bmi, setIsNext }: Props) => {
+const Result = () => {
+  const [bmi, setBmi] = useAtom(bmiValueAtom);
   const rangeArray = checkBmiRange(bmi);
   const BMI_VALUES = [0, 18.5, 23, 25, 30, 35];
 
   const handleClickRestart = () => {
-    setIsNext(false);
+    setBmi(0.0);
+    Router.push('/bmi');
   };
+
+  useEffect(() => {
+    if (bmi === 0.0) Router.push('/bmi');
+  }, [bmi]);
+  if (bmi === 0.0) return null;
 
   return (
     <div>

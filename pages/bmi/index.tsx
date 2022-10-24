@@ -1,17 +1,16 @@
-import { ChangeEvent, Dispatch, FormEvent, SetStateAction, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import styled from '@emotion/styled';
+import { useUpdateAtom } from 'jotai/utils';
 
 import { EMAIL_REGEXP, FIRST_DECIMAL_REGEXP } from '@/constant';
+import { bmiValueAtom } from '@/store/bmiAtoms';
 import { colors } from '@/styles/colors';
+import Router from 'next/router';
 
-interface Props {
-  setBmi: Dispatch<SetStateAction<number>>;
-  setIsNext: Dispatch<SetStateAction<boolean>>;
-}
-
-const CalculateForm = ({ setBmi, setIsNext }: Props) => {
+const Bmi = () => {
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [isActive, setIsActive] = useState(false);
+  const setBmi = useUpdateAtom(bmiValueAtom);
 
   const [input, setInput] = useState({
     name: '',
@@ -32,7 +31,7 @@ const CalculateForm = ({ setBmi, setIsNext }: Props) => {
     const calculateBmi = Number((weightFloat / (heightFloat * heightFloat)).toFixed(1));
     setBmi(calculateBmi);
 
-    if (isPassedEmail) setIsNext(true);
+    if (isPassedEmail) Router.push('/bmi/result');
   };
 
   const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -152,4 +151,4 @@ const CalculateButton = styled.button<CalculateButtonProps>`
   cursor: ${(props) => (props.isActive ? 'pointer' : 'default')};
 `;
 
-export default CalculateForm;
+export default Bmi;
