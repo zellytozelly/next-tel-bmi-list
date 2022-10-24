@@ -18,6 +18,7 @@ $ npm run dev
 - 언어 : TypeScript
 - 프레임워크 : Next.js
 - UI 라이브러리 : Emotion
+- 상태관리 : jotai
 
 ## ✅ TODO
 

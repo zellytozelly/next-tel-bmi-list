@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import { Router } from 'next/router';
+import { useRouter } from 'next/router';
 import { DehydratedState, Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import styled from '@emotion/styled';
 import { Global } from '@emotion/react';
+import { useUpdateAtom } from 'jotai/utils';
 import globals from '@/styles/globals';
 import '@/styles/reset.css';
 
@@ -13,29 +14,28 @@ import { FNB } from '@/components/fnb';
 import { DEPLOY_URL } from '@/constant';
 import Spinner from '@/components/common/Spinner';
 import { Header } from '@/components/header';
+import { headerTextAtom } from '@/store/headerAtom';
+import { useLoading } from '@/hooks';
 
 const META_DATA = { title: '해피문데이', description: '해피문데이 : 연락처 목록 검색 & BMI 계산하기' };
 
 const MyApp = ({ Component, pageProps }: AppProps<{ dehydratedState: DehydratedState }>) => {
   const [queryClient] = useState(() => new QueryClient());
-  const [loading, setLoading] = useState(true);
+  const [isLoading] = useLoading();
+  const router = useRouter();
+  const setHeaderText = useUpdateAtom(headerTextAtom);
 
   useEffect(() => {
-    const start = () => {
-      setLoading(true);
-    };
-    const end = () => {
-      setLoading(false);
-    };
-    Router.events.on('routeChangeStart', start);
-    Router.events.on('routeChangeComplete', end);
-    Router.events.on('routeChangeError', end);
-    return () => {
-      Router.events.off('routeChangeStart', start);
-      Router.events.off('routeChangeComplete', end);
-      Router.events.off('routeChangeError', end);
-    };
-  }, []);
+    const menuTitle = {
+      '/': 'HOME',
+      '/contacts': '연락처 전체보기',
+      '/search': '연락처 검색하기',
+      '/bmi': 'BMI 계산하기',
+    }[router.pathname];
+
+    if (!menuTitle) return;
+    setHeaderText(menuTitle);
+  }, [router.pathname, setHeaderText]);
 
   return (
     <>
@@ -58,7 +58,7 @@ const MyApp = ({ Component, pageProps }: AppProps<{ dehydratedState: DehydratedS
             <AppContainerBox>
               <Header />
               <AppBox>
-                {loading ? (
+                {isLoading ? (
                   <SpinnerBox>
                     <Spinner />
                   </SpinnerBox>
