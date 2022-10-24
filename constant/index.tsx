@@ -29,6 +29,15 @@ export const MENU_DATA = [
   { name: 'BMI 계산하기', path: '/bmi', description: '키와 몸무게로 건강 체크해보기!', icon: <BmiIcon /> },
 ];
 
+export const MENU_COMPACT_DATA: { [key: string]: string } = {
+  '/': 'HOME',
+  '/contacts': '연락처 전체보기',
+  '/search': '연락처 검색하기',
+  '/bmi': 'BMI 계산하기',
+};
+
+export const META_DATA = { title: '해피문데이', description: '해피문데이 : 연락처 목록 검색 & BMI 계산하기' };
+
 // bmi
 export const BMI_COLOR_LIST = [
   colors.LIGHT_GREY,

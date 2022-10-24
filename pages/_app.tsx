@@ -11,13 +11,11 @@ import globals from '@/styles/globals';
 import '@/styles/reset.css';
 
 import { FNB } from '@/components/fnb';
-import { DEPLOY_URL } from '@/constant';
+import { DEPLOY_URL, MENU_COMPACT_DATA, META_DATA } from '@/constant';
 import Spinner from '@/components/common/Spinner';
 import { Header } from '@/components/header';
 import { headerTextAtom } from '@/store/headerAtoms';
 import { useLoading } from '@/hooks';
-
-const META_DATA = { title: '해피문데이', description: '해피문데이 : 연락처 목록 검색 & BMI 계산하기' };
 
 const MyApp = ({ Component, pageProps }: AppProps<{ dehydratedState: DehydratedState }>) => {
   const [queryClient] = useState(() => new QueryClient());
@@ -26,12 +24,7 @@ const MyApp = ({ Component, pageProps }: AppProps<{ dehydratedState: DehydratedS
   const setHeaderText = useUpdateAtom(headerTextAtom);
 
   useEffect(() => {
-    const menuTitle = {
-      '/': 'HOME',
-      '/contacts': '연락처 전체보기',
-      '/search': '연락처 검색하기',
-      '/bmi': 'BMI 계산하기',
-    }[router.pathname];
+    const menuTitle = MENU_COMPACT_DATA[router.pathname];
 
     if (!menuTitle) return;
     setHeaderText(menuTitle);
