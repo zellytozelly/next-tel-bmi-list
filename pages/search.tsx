@@ -6,6 +6,7 @@ import { useIntersect } from '@/hooks';
 import { useContactByQuery, useTotalPageNoByQuery } from '@/hooks/queries';
 import { Card, SearchForm } from '@/components/contact';
 import Spinner from '@/components/common/Spinner';
+import { colors } from '@/styles/colors';
 
 const Search = () => {
   const [query, setQuery] = useState('');
@@ -68,6 +69,7 @@ const Target = styled.div`
 const ErrorText = styled.p`
   margin-top: 20px;
   text-align: center;
+  color: ${colors.TEXT_39};
 `;
 
 const SpinnerBox = styled.div`
