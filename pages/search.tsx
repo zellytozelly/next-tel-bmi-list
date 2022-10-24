@@ -7,15 +7,16 @@ import { useIntersect } from '@/hooks';
 import { getContacts, getContactsTotalPage } from '@/services/contact';
 import { Card, SearchForm } from '@/components/contact';
 import Spinner from '@/components/common/Spinner';
+import { contactKeys } from '@/constant/queryKeys';
 
 const Search = () => {
   const [query, setQuery] = useState('');
 
-  const { data: totalPageNo } = useQuery(['totalPageNo', query], ({ signal }) =>
+  const { data: totalPageNo } = useQuery(contactKeys.totalPageNoByQuery(query), ({ signal }) =>
     getContactsTotalPage({ search: query, signal: signal! }),
   );
   const { data, isFetching, fetchNextPage, hasNextPage } = useInfiniteQuery(
-    ['contacts', query],
+    contactKeys.contactByQuery(query),
     ({ pageParam = 1, signal }) => getContacts({ page: pageParam, search: query, signal: signal! }),
     {
       enabled: !!query,

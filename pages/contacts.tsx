@@ -6,14 +6,17 @@ import styled from '@emotion/styled';
 import { getContacts, getContactsTotalPage } from '@/services/contact';
 import { PaginationButton } from '@/components/common';
 import { Card } from '@/components/contact';
+import { contactKeys } from '@/constant/queryKeys';
 
 const Contacts = () => {
   const [page, setPage] = useState(1);
   const queryClient = useQueryClient();
 
-  const { data: totalPageNo } = useQuery(['totalPageNo'], ({ signal }) => getContactsTotalPage({ signal: signal! }));
+  const { data: totalPageNo } = useQuery(contactKeys.totalPageNo, ({ signal }) =>
+    getContactsTotalPage({ signal: signal! }),
+  );
   const { isLoading, isError, data } = useQuery(
-    ['contacts', page],
+    contactKeys.contactPerPage(page),
     ({ signal }) => getContacts({ page, signal: signal! }),
     {
       keepPreviousData: true,
@@ -24,7 +27,9 @@ const Contacts = () => {
 
   useEffect(() => {
     if (page === totalPageNo) return;
-    queryClient.prefetchQuery(['contacts', page + 1], ({ signal }) => getContacts({ page: page + 1, signal: signal! }));
+    queryClient.prefetchQuery(contactKeys.contactPerPage(page + 1), ({ signal }) =>
+      getContacts({ page: page + 1, signal: signal! }),
+    );
   }, [page, queryClient, totalPageNo]);
 
   if (isLoading) return <div>loading</div>;
