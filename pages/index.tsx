@@ -12,7 +12,6 @@ const Home = () => {
   return (
     <div>
       <main>
-        <HeaderTitle>Home</HeaderTitle>
         <ul>
           {menuList.map(({ name, path, description }) => {
             return (

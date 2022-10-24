@@ -14,7 +14,6 @@ const Bmi = () => {
         <title>나의 BMI - 해피문데이</title>
       </Head>
       <div>
-        <HeaderTitle>나의 BMI 계산하기</HeaderTitle>
         {!isNext ? <CalculateForm setBmi={setBmi} setIsNext={setIsNext} /> : <Result bmi={bmi} setIsNext={setIsNext} />}
       </div>
     </>

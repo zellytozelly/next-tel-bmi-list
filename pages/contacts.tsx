@@ -37,7 +37,6 @@ const Contacts = () => {
         <title>연락처 - 해피문데이</title>
       </Head>
       <div>
-        <HeaderTitle>연락처 전체보기</HeaderTitle>
         <ContactSection>
           <ContactCardWrapper>
             {data.map((item) => {

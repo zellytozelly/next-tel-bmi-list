@@ -16,7 +16,7 @@ const HeaderTitle = ({ children }: Props) => {
 };
 
 const HeaderTitleContainer = styled.div`
-  padding: 24px 0;
+  padding: 24px 30px;
 
   h2 {
     color: ${colors.TEXT_39};

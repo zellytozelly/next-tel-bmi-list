@@ -45,7 +45,6 @@ const Search = () => {
         <title>연락처 검색 - 해피문데이</title>
       </Head>
       <div>
-        <HeaderTitle>연락처 검색하기</HeaderTitle>
         <SearchForm setQuery={setQuery} />
         <ContactSection>
           <ContactCardWrapper>

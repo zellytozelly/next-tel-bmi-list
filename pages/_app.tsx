@@ -12,6 +12,7 @@ import '@/styles/reset.css';
 import { FNB } from '@/components/fnb';
 import { DEPLOY_URL } from '@/constant';
 import Spinner from '@/components/common/Spinner';
+import { Header } from '@/components/header';
 
 const META_DATA = { title: '해피문데이', description: '해피문데이 : 연락처 목록 검색 & BMI 계산하기' };
 
@@ -21,11 +22,9 @@ const MyApp = ({ Component, pageProps }: AppProps<{ dehydratedState: DehydratedS
 
   useEffect(() => {
     const start = () => {
-      console.log('start');
       setLoading(true);
     };
     const end = () => {
-      console.log('finished');
       setLoading(false);
     };
     Router.events.on('routeChangeStart', start);
@@ -57,6 +56,7 @@ const MyApp = ({ Component, pageProps }: AppProps<{ dehydratedState: DehydratedS
           <Global styles={globals} />
           <BackgroundBox>
             <AppContainerBox>
+              <Header />
               <AppBox>
                 {loading ? (
                   <SpinnerBox>

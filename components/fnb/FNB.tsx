@@ -1,13 +1,23 @@
 import Link from 'next/link';
+import { MouseEvent } from 'react';
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
+import { useUpdateAtom } from 'jotai/utils';
 
+import { headerTextAtom } from '@/store/headerAtom';
 import { colors } from '@/styles/colors';
 import { MENU_DATA } from '@/constant';
 
 const FNB = () => {
   const router = useRouter();
+  const setHeaderAtom = useUpdateAtom(headerTextAtom);
   const currentRoute = router.pathname;
+
+  const handleClickMenu = (e: MouseEvent<HTMLButtonElement>) => {
+    const { name } = e.currentTarget.dataset;
+    if (!name) return;
+    setHeaderAtom(name);
+  };
 
   return (
     <Footer>
@@ -16,12 +26,14 @@ const FNB = () => {
           {MENU_DATA.map(({ name, path, icon }) => {
             return (
               <li key={name}>
-                <Link href={path}>
-                  <LinkBox isActive={currentRoute === path}>
-                    {icon}
-                    <span>{name}</span>
-                  </LinkBox>
-                </Link>
+                <NavButton type="button" data-name={name} onClick={handleClickMenu}>
+                  <Link href={path}>
+                    <LinkBox isActive={currentRoute === path}>
+                      {icon}
+                      <span>{name}</span>
+                    </LinkBox>
+                  </Link>
+                </NavButton>
               </li>
             );
           })}
@@ -48,6 +60,13 @@ const NavList = styled.ul`
   li + li {
     padding-left: 24px;
   }
+`;
+
+const NavButton = styled.button`
+  background: none;
+  padding: 0;
+  margin: 0;
+  font-size: smaller;
 `;
 
 interface LinkBoxProps {
