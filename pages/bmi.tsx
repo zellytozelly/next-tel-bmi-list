@@ -2,7 +2,6 @@ import { useState } from 'react';
 import Head from 'next/head';
 
 import { CalculateForm, Result } from '@/components/bmi';
-import { HeaderTitle } from '@/components/common';
 
 const Bmi = () => {
   const [bmi, setBmi] = useState(0.0);

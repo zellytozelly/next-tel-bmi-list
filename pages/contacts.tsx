@@ -4,7 +4,7 @@ import Head from 'next/head';
 import styled from '@emotion/styled';
 
 import { getContacts, getContactsTotalPage } from '@/services/contact';
-import { HeaderTitle, PaginationButton } from '@/components/common';
+import { PaginationButton } from '@/components/common';
 import { Card } from '@/components/contact';
 
 const Contacts = () => {

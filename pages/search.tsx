@@ -5,8 +5,8 @@ import styled from '@emotion/styled';
 
 import { useIntersect } from '@/hooks';
 import { getContacts, getContactsTotalPage } from '@/services/contact';
-import { HeaderTitle } from '@/components/common';
 import { Card, SearchForm } from '@/components/contact';
+import Spinner from '@/components/common/Spinner';
 
 const Search = () => {
   const [query, setQuery] = useState('');
@@ -53,6 +53,11 @@ const Search = () => {
             ))}
             <Target ref={ref} />
             {data?.pages[0].length === 0 && <ErrorText>검색결과가 없습니다.</ErrorText>}
+            {isFetching && (
+              <SpinnerBox>
+                <Spinner />
+              </SpinnerBox>
+            )}
           </ContactCardWrapper>
         </ContactSection>
       </div>
@@ -80,6 +85,11 @@ const Target = styled.div`
 const ErrorText = styled.p`
   margin-top: 20px;
   text-align: center;
+`;
+
+const SpinnerBox = styled.div`
+  display: flex;
+  justify-content: center;
 `;
 
 export default Search;
