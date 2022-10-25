@@ -1,11 +1,11 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import styled from '@emotion/styled';
 import { useUpdateAtom } from 'jotai/utils';
+import Router from 'next/router';
 
 import { EMAIL_REGEXP, FIRST_DECIMAL_REGEXP } from '@/constant';
 import { bmiValueAtom } from '@/store/bmiAtoms';
 import { colors } from '@/styles/colors';
-import Router from 'next/router';
 
 const Bmi = () => {
   const [isValidEmail, setIsValidEmail] = useState(true);
